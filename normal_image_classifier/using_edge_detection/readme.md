@@ -10,6 +10,6 @@ With limited number of train images (300-400 images per letter) the resulting mo
 
 ### False Positives
 Under natural light
-
+(scores<0.45 - unknown)
 ![false_pos_1](images/False_test/E_complex_low_false_pos.jpg?raw=true "Title")
 ![false_pos_1](images/False_test/G_complex_low_false.jpg?raw=true "Title")

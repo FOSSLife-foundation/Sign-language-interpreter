@@ -32,18 +32,20 @@ hands.close()"""
 
 # For webcam input:
 hands = mp_hands.Hands(
-    min_detection_confidence=0.9, min_tracking_confidence=0.5)
+    min_detection_confidence=0.7, min_tracking_confidence=0.5)
 cap = cv2.VideoCapture(0)
 cap.set(3, 1920)
 cap.set(4, 1080)
 count = 0
 t1 = time.time()
+fps = [0]*10
 while cap.isOpened():
+  t2 = time.time()
   count += 1
   success, image = cap.read()
   if not success:
     break
-
+  
   # Flip the image horizontally for a later selfie-view display, and convert
   # the BGR image to RGB.
   image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
@@ -51,7 +53,6 @@ while cap.isOpened():
   # pass by reference.
   image.flags.writeable = False
   results = hands.process(image)
-  print(results)
 
   # Draw the hand annotations on the image.
   image.flags.writeable = True
@@ -61,7 +62,11 @@ while cap.isOpened():
       mp_drawing.draw_landmarks(
           image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
   cv2.imshow('MediaPipe Hands', image)
-  # print(count/(time.time() - t1))
+  print(count/(time.time() - t1))
+  t3 = time.time() - t2
+  print(t3)
+  fps[count % 10] = 1/(t3)
+  print("FPS:", sum(fps)/10)
   if cv2.waitKey(5) & 0xFF == 27:
     break
 hands.close()

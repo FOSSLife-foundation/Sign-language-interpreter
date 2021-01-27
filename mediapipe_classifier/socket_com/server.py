@@ -1,4 +1,5 @@
 import socket, cv2, pickle,struct,imutils
+from imutils.video import VideoStream
 from funcs import tcp_read, tcp_write
 
 # Socket Create
@@ -22,18 +23,20 @@ while True:
     client_socket,addr = server_socket.accept()
     print('GOT CONNECTION FROM:',addr)
     if client_socket:
-        vid = cv2.VideoCapture(0)
-        vid.set(3, 1280)
-        vid.set(4, 720)
-        while(vid.isOpened()):
-            img,frame = vid.read()
-            frame = imutils.resize(frame,width=320)
+        vid = VideoStream(src=0, usePiCamera=True).start()
+        
+        while True:
+            img = vid.read()
+            try:
+                frame = imutils.resize(img,width=320)
+            except:
+                continue
             a = pickle.dumps(frame)
             message = struct.pack("Q",len(a))+a
             client_socket.sendall(message)
             cv2.imshow('TRANSMITTING VIDEO',frame)
-            ack = tcp_read(client_socket)
-            # print(ack)
+            guess = tcp_read(client_socket)
+            print(guess)
             key = cv2.waitKey(1) & 0xFF
             if key ==ord('q'):
                 client_socket.close()

@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report,confusion_matrix
 from keras.callbacks import ReduceLROnPlateau
 
-model = keras.models.load_model("model_1")
+model = keras.models.load_model("models/model_4")
 
 import cv2
 import mediapipe as mp
@@ -20,7 +20,11 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
 hands = mp_hands.Hands(
-    min_detection_confidence=0.7, min_tracking_confidence=0.5)
+    min_detection_confidence=0.8, min_tracking_confidence=0.5)
+
+# number of keypoints per hand
+kp_num = 21
+
 cap = cv2.VideoCapture(0)
 cap.set(3, 1280)
 cap.set(4, 720)
@@ -44,11 +48,10 @@ while cap.isOpened():
             row = []
             for i in hand_landmarks.landmark:
                 row += [i.x, i.y]
-            row = np.array(row).reshape(1,42)
+            row = np.array(row).reshape(1, kp_num * 2)
             prediction = model.predict(row)
             guess = np.argmax(prediction)
-            
-            cv2.putText(image,letters[guess], (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
+            cv2.putText(image,letters[guess] + ", confidence: " + str(round(prediction[0, guess] * 100, 2)), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0),2)
             
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
@@ -56,6 +59,7 @@ while cap.isOpened():
     #print(count/(time.time() - t1))
     if cv2.waitKey(5) & 0xFF == 27:
         break
+
 hands.close()
 cap.release()
   

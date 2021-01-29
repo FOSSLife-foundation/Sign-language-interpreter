@@ -21,10 +21,10 @@ train_to_test_ratio = 9
 
 header = 'letter,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42\n'
 
-with open('test_data.csv', 'a') as f:
+with open('csv_data/test_data.csv', 'a') as f:
     f.write(header)
 
-with open('train_data.csv', 'a') as f:
+with open('csv_data/train_data.csv', 'a') as f:
     f.write(header)
 
 for a in letters:
@@ -63,8 +63,8 @@ for a in letters:
             
             # move points
             for i in range(len(point_lists)):
-                for i in range(4):
-                    new_list = move_key_points(point_list)
+                for j in range(4):
+                    new_list = move_key_points(point_lists[i])
                     point_lists.append(new_list)
                     row = a
                     for point in new_list:
@@ -99,12 +99,12 @@ for a in letters:
             for i in range(len(rows)//(train_to_test_ratio + 1)):
                 j = randint(0, len(rows) - 1)
                 test_rows.append(rows.pop(j))
-            with open('test_data.csv', 'a') as f:
+            with open('csv_data/test_data.csv', 'a') as f:
                 f.write(''.join(test_rows))
             
-            with open('train_data.csv', 'a') as f:
+            with open('csv_data/train_data.csv', 'a') as f:
                 f.write(''.join(rows))
-            # print(len(rows))
+            
         mp_drawing.draw_landmarks(annotated_image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
         cv2.imwrite("marked_data/" + a + str(idx) + '.jpg', cv2.flip(annotated_image, 1))
 

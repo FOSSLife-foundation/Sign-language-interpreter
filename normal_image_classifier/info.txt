@@ -1,2 +1,0 @@
-This contains alternative methods for ASL letter classification
-

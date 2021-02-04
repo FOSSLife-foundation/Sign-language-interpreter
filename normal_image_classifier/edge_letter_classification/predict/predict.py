@@ -3,7 +3,7 @@ import cv2
 import tensorflow as tf
 import os
 import numpy as np
-#import time
+
 
 
 def showscore(img,scores):
@@ -44,13 +44,11 @@ legend = {
         23:"X",
         24:"Y",
         25:"Z",
-        26:"del",
-        27:"space",
-        28:"none"
     }
 
 cap =cv2.VideoCapture(0)
 ret , img = cap.read()
+#MODEL DIR
 model_dir="F:/WorkSpace/Sign_Language_Testing/models/model-19-sobel"
 ret,img = cap.read()
 scale = 2
@@ -58,8 +56,8 @@ delta = 0
 ddepth = cv2.CV_16S
 model_loaded = keras.models.load_model(model_dir)
 
-while(True):
-    #st = time.time()
+while(cap.osOpened()):
+
     ret , img = cap.read()
     if ret==False:
         break
@@ -76,8 +74,7 @@ while(True):
     scores = predictions.tolist()
     showscore(img,scores[0])
     cv2.imshow("test",img)
-    #end = time.time()
-    #print(str(end-st))
+
     key = cv2.waitKey(1)
     if key & 0xFF == 27:
         break

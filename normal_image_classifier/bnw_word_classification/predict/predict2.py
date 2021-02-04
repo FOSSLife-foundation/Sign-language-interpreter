@@ -64,3 +64,4 @@ while (cap.isOpened()):
     key = cv2.waitKey(3)
     if key & 0xff == 27:
         break
+cap.release()

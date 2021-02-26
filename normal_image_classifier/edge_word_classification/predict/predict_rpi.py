@@ -3,7 +3,13 @@ import cv2
 import tensorflow as tf
 import os
 import numpy as np
+''' 
+tensorflow==1.14.0
+numpy==1.20.1
+keras==2.3.1
+h5py==2.10.0
 
+'''
 
 
 def showscore(img,scores):
@@ -18,43 +24,25 @@ def showscore(img,scores):
         cv2.putText(img,  "unknown", (50,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,0), 1, cv2.LINE_AA)
 
 legend = {
-        0:"A",
-        1:"B",
-        2:"C",
-        3:"D",
-        4:"E",
-        5:"F",
-        6:"G",
-        7:"H",
-        8:"I",
-        9:"J",
-        10:"K",
-        11:"L",
-        12:"M",
-        13:"N",
-        14:"O",
-        15:"P",
-        16:"Q",
-        17:"R",
-        18:"S",
-        19:"T",
-        20:"U",
-        21:"V",
-        22:"W",
-        23:"X",
-        24:"Y",
-        25:"Z",
-    }
+        0:"Brother",
+        1:"Hello",
+        2:"i",
+        3:"learn",
+        4:"learner_1",
+        5:"learner_2",
+        6:"name",
+        7:"no"
+}
 
 cap =cv2.VideoCapture(0)
 ret , img = cap.read()
 #MODEL DIR
-model_dir="/home/pi/Desktop/Chamodya-ka/Sign-language-interpreter/normal_image_classifier/edge_letter_classification/models/edge_letter_tflife/letter.tflite"
+model_dir="/home/pi/Desktop/Chamodya-ka/Sign-language-interpreter/normal_image_classifier/edge_word_classification/models/edge_word_tflite/edge_word.tflite"
 ret,img = cap.read()
 scale = 2
 delta = 0
 ddepth = cv2.CV_16S
-#model_loaded = keras.models.load_model(model_dir)
+
 interpreter = tf.lite.Interpreter(model_path=model_dir)
 interpreter.allocate_tensors()
 
@@ -81,7 +69,7 @@ while(cap.isOpened()):
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
     print(output_data)
-    #predictions = model_loaded.predict(imga)
+    
     scores = output_data.tolist()
     showscore(img,scores[0])
     cv2.imshow("test",img)

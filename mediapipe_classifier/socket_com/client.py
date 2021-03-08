@@ -153,6 +153,8 @@ while True:
         letter_det = not letter_det
     cv2.imshow("RECEIVING VIDEO",image)
     tcp_write(client_socket, guess)
+    if guess != '':
+        time.sleep(1)
     key = cv2.waitKey(1) & 0xFF
     if key  == ord('q'):
         break    

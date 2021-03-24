@@ -9,5 +9,4 @@ end frames.
  3. Trained a CNN by using sobel edge highlighting (EH for short) operator for pre-processing.
 
 ## Results
-There are 8 output labels in total, 6 unique words and 2 starting and ending frame of a gesture. With the addition of more images since the previous iteration this model had a 
-relatively higher accuracy than that of binary image classifier. As this is an uses direct camera input lighting conditions, camera angle, etc. effect the overall accuracy. 
+There are 8 output labels in total, 6 unique words and 2 starting and ending frame of a gesture. With the recent addition of more images edge highlighted method had a better accuracy than the binary image classifier and a significant improvement over the previous iteration this model. As this is an uses direct camera input lighting conditions, camera angle, etc. effect the overall accuracy. 

@@ -3,6 +3,8 @@ import cv2
 import tensorflow as tf
 import os
 import numpy as np
+import tts
+
 ''' 
 tensorflow==1.14.0
 numpy==1.20.1
@@ -16,7 +18,7 @@ def showscore(img,scores,legend):
     name="unknown"
     gesture_ind = np.argmax(scores)
     confidence = scores[0, gesture_ind]
-    if confidence>=0.7:
+    if confidence>=0.9:
         #i=scores.index(gesture)
         name=legend[gesture_ind]
         cv2.putText(img,  name, (50,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 1, cv2.LINE_AA)
@@ -41,8 +43,8 @@ def pred_letter(imga,input_details,output_details):
     #scores = output_data.tolist()
     return showscore(img,output_data,letter_legend)
 
-letter_model_dir = "./training_and_testing/edge_letter_classification/models/tflite_with_switch/letter_sobel.tflite"
-word_model_dir = "./training_and_testing/edge_word_classification/models/egde_word_tflite_with_switch/word_sobel.tflite"
+letter_model_dir = "./training_and_testing/edge_letter_classification/models/tflite_with_switch/letter_sobel_III.tflite"
+word_model_dir = "./training_and_testing/edge_word_classification/models/egde_word_tflite_with_switch/word_sobel_II.tflite"
 
 letter_legend={
         0:"A",
@@ -104,7 +106,10 @@ word_input_details = word_interpreter.get_input_details()
 word_output_details = word_interpreter.get_output_details()
 
 word_pred = True
+pred_lst = []
 
+half=0
+frames=5
 while(cap.isOpened()):
 
     ret , img = cap.read()
@@ -122,12 +127,39 @@ while(cap.isOpened()):
     
     if word_pred==True:
         label = pred_word(imga,word_input_details,word_output_details)
+        if label == "learner_1":
+            label="unknown"
+            half=1
+        elif half==1:
+            frames-=1
+            if frames<=0:
+                half=0
+                pass
+            elif label=="learner_2":
+                label="learner"
+        elif label == "learner_2":
+            label="unknown"
+        
     else:
         label = pred_letter(imga,letter_input_details,letter_output_details)
         
-    if label=="switch":
-        word_pred= not word_pred
-        print("Switching models")
+    if label!="unknown":
+        
+        if label=="switch":
+            word_pred= not word_pred
+            print("Switching models")
+            if len(pred_lst)>0:
+                tts.tts_(["Switching models"])
+                pred_lst=[]
+        else:
+            pred_lst.append(label)
+    if len(pred_lst)>5:
+        
+        if len(pred_lst)==pred_lst.count(pred_lst[0]):
+            tts.tts_([pred_lst[0]])
+            
+        pred_lst=[]
+        
         
     cv2.imshow("test",img)
 

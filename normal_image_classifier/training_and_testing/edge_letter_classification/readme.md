@@ -6,7 +6,7 @@
 3) Compared performance and chose EH for preprossing.
 
 ### Model
-![alt text](https://github.com/Chamodya-ka/Sign-language-interpreter/blob/main/normal_image_classifier/edge_letter_classification/images/model.jpg)
+![alt text](https://github.com/FOSSLife-foundation/Sign-language-interpreter/blob/main/normal_image_classifier/training_and_testing/edge_letter_classification/images/model.jpg)
 
 ## Results
 
@@ -15,7 +15,7 @@ With limited number of train images (~200 images per letter) the resulting model
 ### Incorrect predictions and low accuracy
 In both cases correct label was 'A'
 
-![alt text](https://github.com/Chamodya-ka/Sign-language-interpreter/blob/main/normal_image_classifier/edge_letter_classification/images/False_test/A_as_T.jpg)
+![alt text](https://github.com/FOSSLife-foundation/Sign-language-interpreter/blob/main/normal_image_classifier/training_and_testing/edge_letter_classification/images/False_test/A_as_T.jpg)
 
-![alt text](https://github.com/Chamodya-ka/Sign-language-interpreter/blob/main/normal_image_classifier/edge_letter_classification/images/False_test/A_low_acc.jpg)
+![alt text](https://github.com/FOSSLife-foundation/Sign-language-interpreter/blob/main/normal_image_classifier/training_and_testing/edge_letter_classification/images/False_test/A_low_acc.jpg)
 

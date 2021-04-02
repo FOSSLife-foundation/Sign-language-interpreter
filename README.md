@@ -77,3 +77,6 @@ while cap.isOpened():
     if cv2.waitKey(5) & 0xFF == 27:
         break
 ```
+
+## Demo
+![](https://github.com/FOSSLife-foundation/Sign-language-interpreter/blob/main/demo/mp_letter_demo.gif)

@@ -16,12 +16,24 @@ pip install .
 ## Import structure
 - ASLInterpreter
   - predict
-    - edge_letter
+    - edge_letter - Used to classify letters given edge highlighted frames 
+      - showscore()
+        - Input - model output
+        - Output - predicted label
+        - Used to visualize the output   
+      - predict()
+        - Input - Edge higlighted image of shape (240,240,1)
+        - Output - model output
+        - Used predict the letter given a single frame/ image    
+      - load_model()
+        - Input - absolute path to tflite model as a String "F:/Workspace/models/letter.tflite"
+        - Output - None
+        - Used to load the model    
+    - edge_word - Used to classify words given edge highlighted frames
       - showscore()
       - predict()
-    - edge_word
-      - showscore()
-      - predict()
+      - load_model()
+        *Almost identicle to edge_letter   
     - predict_mp
       - load_letters_model()
       - load_words_model()
@@ -30,6 +42,9 @@ pip install .
   - preprocess
     - edge_highlight
       - preprocess()
+        - Input - RGB image (,,3)
+        - Output - Resized edge highlighted image of shape (240,240,1)
+        - Used to pre-process the video frames / images before prediction
     - mp_data_augmentation
       - flip_keypoints()
       - scale_keypoints()

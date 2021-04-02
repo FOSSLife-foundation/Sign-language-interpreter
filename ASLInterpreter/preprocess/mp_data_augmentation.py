@@ -10,17 +10,17 @@ def find_center(point_list):
         tot_y += i[1]
     return [tot_x/n, tot_y/n]
 
-def flip_key_points(point_list):
+def flip_keypoints(point_list):
     flipped_list = [[1 - i[0], i[1]] for i in point_list]
     return flipped_list
 
-def scale_key_points(point_list, min_scale = 0.8, max_scale = 1.6):
+def scale_keypoints(point_list, min_scale = 0.8, max_scale = 1.6):
     rand_scale = 1 + (max_scale - min_scale) * (random() - (1 - min_scale))
     center = find_center(point_list)
     scaled_list = [[center[0] + (i[0] - center[0]) * rand_scale, center[1] + (i[1] - center[1]) * rand_scale] for i in point_list]
     return scaled_list
 
-def move_key_points(point_list):
+def move_keypoints(point_list):
     min_x = min(point_list, key=lambda x: x[0])[0]
     max_x = max(point_list, key=lambda x: x[0])[0]
     min_y = min(point_list, key=lambda x: x[1])[1]

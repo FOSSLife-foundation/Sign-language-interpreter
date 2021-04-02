@@ -40,7 +40,7 @@ pip install .
 
 ## Example
 Mediapipe-based classifier example
-```console
+```python
 from ASLInterpreter.predict.predict_mediapipe import *
 import cv2
 

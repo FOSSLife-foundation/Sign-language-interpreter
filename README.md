@@ -102,7 +102,7 @@ load_model("F:/WorkSpace/FOSSLIFE/Sign-Language-Interpreter/Sign-language-interp
 
 while cap.isOpened():
     success, image = cap.read()
-    if not ret:
+    if not success:
         break
        
     # Get edge highlited image

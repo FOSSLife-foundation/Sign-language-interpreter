@@ -1,6 +1,6 @@
 import cv2
 
-def preprocess_(img,size=(240,240),scale=2,delta=0,ddepth=cv2.CV_16S):
+def preprocess(img,size=(240,240),scale=2,delta=0,ddepth=cv2.CV_16S):
     '''
     :param img: input raw frame
     :return: edge highlighted image shape (240,240,1) by default

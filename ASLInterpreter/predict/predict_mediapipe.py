@@ -13,6 +13,8 @@ hands = mp_hands.Hands(
 kp_num = 21
 model_letters = keras.models.load_model("C:/Users/ASUS/Desktop/Automation Challenge/Sign-language-interpreter/ASLInterpreter/models/model_letters")
 model_words = None
+letters =  ['_switch'] + list('abcdefghijklmnopqrstuvwxy')
+words = ['_switch', 'name', 'i', 'hello', 'learn', 'yes', 'no', 'thank', 'you', 'who', 'what', 'when', 'where', 'why', 'how', 'which']
 
 def load_letters_model(path):
     """
@@ -28,6 +30,7 @@ def load_words_model(model_path, face_classifier_path):
     :param path: path to the directory containing the saved_model.pb file
     """
     model_words = keras.models.load_model(path)
+    print(model_letters.summary())
     face_cascade = cv2.CascadeClassifier('../models/haarcascade_frontalface_default.xml')
 
 def predict_letters_from_image(image, show_conf=True, show_landmarks=True, threshold=0.99):
@@ -45,7 +48,7 @@ def predict_letters_from_image(image, show_conf=True, show_landmarks=True, thres
     image.flags.writeable = True
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     if not results.multi_hand_landmarks:
-        return False
+        return None, None, image
     for hand_landmarks in results.multi_hand_landmarks:
         row = []
         if show_landmarks:

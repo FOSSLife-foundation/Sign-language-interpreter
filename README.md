@@ -10,7 +10,7 @@ The classification can be done using two types of models
 - <strong>Mediapipe-based</strong>: Here, Mediapipe is used to detect and obtain the coordinates of different landmarks of the hand. These landmarks are fed into a classification model and a prediction of the respective sign is obtained.
 - <strong>Edge higlighted based</strong>: Here, the edges of shapes in the input image are highlighted and the resulting image is fed into a classification model for the prediction to be made.
 
-Of the two methods, the Mediapipe-based model seemed to outperform the Edge highlighted based model in accuracy while the opposite was true when it came to speed.
+Of the two methods, the Mediapipe-based model seemed to consistently outperform the Edge highlighted based model in accuracy while the opposite was true when it came to speed. Thus, the Mediapipe-based model is recommended for most cases except for when performance is a significant factor in which case the Edge highlighted model may be suitable.
 
 ## Install
 ```console 

@@ -48,7 +48,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 
-load_letters_model("C:/Users/ASUS/Desktop/Automation Challenge/Sign-language-interpreter/ASLInterpreter/models/model_letters")
+load_letters_model("C:/Sign-language-interpreter/ASLInterpreter/models/model_letters")
 
 while cap.isOpened():
     success, image = cap.read()

@@ -13,12 +13,52 @@ cd Sign-Language-Interpreter
 pip install .
 ```
 
-## Usage
-Import package with:
+## Import structure
+- ASLInterpreter
+  - predict
+    - edge_letter
+      - showscore()
+      - predict()
+    - edge_word
+      - showscore()
+      - predict()
+    - predict_mp
+      - load_letters_model()
+      - load_words_model()
+      - predict_letters()
+      - predict_words()
+  - preprocess
+    - edge_highlight
+      - preprocess()
+    - mp_data_augmentation
+      - flip_keypoints()
+      - scale_keypoints()
+      - move_keypoints()
+      - rotate_keypoints()
+      - find_center()
+      - rotate_point()
+
+## Example
+Mediapipe-based classifier example
 ```console
-import ASLInterpreter
+from ASLInterpreter.predict.predict_mediapipe import *
+import cv2
+
+cap = cv2.VideoCapture(0)
+cap.set(3, 320)
+cap.set(4, 240)
+
+load_letters_model("C:/Users/ASUS/Desktop/Automation Challenge/Sign-language-interpreter/ASLInterpreter/models/model_letters")
+
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        break
+    letter, confidence, image = predict_letters_from_image(image)
+    if letter:
+        print(letter, ":", confidence)
+    
+    cv2.imshow('Test', image)
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
 ```
-### Mediapipe-based Classifier
-
-
-### Normal Classifier

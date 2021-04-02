@@ -41,7 +41,7 @@ pip install .
 ## Example
 Mediapipe-based classifier example
 ```python
-from ASLInterpreter.predict.predict_mediapipe import *
+from ASLInterpreter.predict.predict_mp import *
 import cv2
 
 cap = cv2.VideoCapture(0)

@@ -4,6 +4,25 @@ import tensorflow as tf
 import os
 import numpy as np
 
+
+interpreter=None
+input_details=None
+output_details=None
+
+
+def load_model(path):
+    '''
+    Function to load the word classification model
+    :param img: model path
+    '''
+    global interpreter ,input_details ,output_details
+    interpreter = tf.lite.Interpreter(model_path=path) 
+    interpreter.allocate_tensors()
+    input_details = interpreter.get_input_details()
+    output_details = interpreter.get_output_details()
+    print("edge-word model loaded")
+
+
 def showscore(img,scores):
     '''
     Function that can help visualize the output prediction
@@ -17,9 +36,8 @@ def showscore(img,scores):
     confidence = scores[0, gesture_ind]
     if confidence>=treshold:
         name=legend[gesture_ind]
-    cv2.putText(img,name)
+    cv2.putText(img,name,(20,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),1,cv2.LINE_AA)
     print(confidence,name)
-    
     return name
 
 def predict(edges,visualize=True):
@@ -38,11 +56,7 @@ def predict(edges,visualize=True):
     return output_data
 
 
-model_dir = '../models/edge_word.tflite'
-interpreter = tf.lite.Interpreter(model_path=model_dir)
-interpreter.allocate_tensors()
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
+
 
 legend = {
         0:"brother",

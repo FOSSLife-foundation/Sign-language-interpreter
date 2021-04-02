@@ -11,8 +11,6 @@ hands = mp_hands.Hands(
     min_detection_confidence=0.8, min_tracking_confidence=0.5)
 
 kp_num = 21
-model_letters = keras.models.load_model("C:/Users/ASUS/Desktop/Automation Challenge/Sign-language-interpreter/ASLInterpreter/models/model_letters")
-model_words = None
 
 def load_letters_model(path):
     """
@@ -20,7 +18,6 @@ def load_letters_model(path):
     :param path: path to the directory containing the saved_model.pb file
     """
     model_letters = keras.models.load_model(path)
-    print(model_letters.summary())
     
 def load_words_model(model_path, face_classifier_path):
     """
@@ -53,7 +50,7 @@ def predict_letters_from_image(image, show_conf=True, show_landmarks=True, thres
         for i in hand_landmarks.landmark:
             row += [i.x, i.y]
         row = np.array(row).reshape(1, kp_num * 2)
-        prediction = model_letters.predict(row)
+        prediction = model.predict(row)
         guess = np.argmax(prediction)
         if prediction[0, guess] > threshold:
             if show_conf:

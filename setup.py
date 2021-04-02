@@ -1,11 +1,11 @@
 from setuptools import find_packages, setup
+
 setup(
     name='ASLInterpreter',
     packages=find_packages(),
-    version='0.1.0',
+    version='0.0.1',
     description='A framework to predict American Sign Language',
-    author='ASL Inter',
+    author='FOSSLife Foundation',
     license='MIT',
-    install_requires=['mediapipe'],
-    zip_safe=False
+    install_requires=['mediapipe', 'opencv-python', 'keras']
 )

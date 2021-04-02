@@ -88,7 +88,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 
-load_model("F:/WorkSpace\FOSSLIFE/Sign-Language-Interpreter/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite")
+load_model("F:/WorkSpace/FOSSLIFE/Sign-Language-Interpreter/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite")
 
 while cap.isOpened():
     success, image = cap.read()

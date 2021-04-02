@@ -3,14 +3,14 @@
 ## Introduction
 The goal of this project is to build a system that acts as a translator for Sign Language, specifically American Sign Language (ASL). 
 
-## How it Works
-Frames from a video feed taken from a camera would be given as input to a pair of classification models. The camera would be positioned in front of the signer and as he/she is signing, one of the models would attempt to detect letters of the alphabet while the other would attempt to detect words/expressions in ASL. Both the models would be running on a Raspberry Pi and the video feed would be taken from a Pi camera. The exact architecture in which the two models are used is to be decided based on their individual performance and their composite performance.
-
 The classification can be done using two types of models
 - <strong>Mediapipe-based</strong>: Here, Mediapipe is used to detect and obtain the coordinates of different landmarks of the hand. These landmarks are fed into a classification model and a prediction of the respective sign is obtained.
 - <strong>Edge higlighted based</strong>: Here, the edges of shapes in the input image are highlighted and the resulting image is fed into a classification model for the prediction to be made.
 
 Of the two methods, the Mediapipe-based model seemed to consistently outperform the Edge highlighted based model in accuracy while the opposite was true when it came to speed. Thus, the Mediapipe-based model is recommended for most cases except for when performance is a significant factor in which case the Edge highlighted model may be suitable.
+
+## How it Works
+Frames from a video feed taken from a camera would be given as input to a pair of classification models. The camera would be positioned in front of the signer and as he/she is signing, one of the models would attempt to detect letters of the alphabet while the other would attempt to detect words/expressions in ASL. Both the models would be running on a Raspberry Pi and the video feed would be taken from a Pi camera. The exact architecture in which the two models are used is to be decided based on their individual performance and their composite performance.
 
 ## Install
 ```console 

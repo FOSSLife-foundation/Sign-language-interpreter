@@ -34,24 +34,28 @@ pip install .
       - predict()
       - load_model()
         *Almost identicle to edge_letter   
-    - predict_mp
+    - predict_mp - Used to classify words and letters using mediapipe
       - load_letters_model()
+        - Input - Absolute path to the model folder (containing the saved_model.pb file)
+        - Output - None
       - load_words_model()
+        - Same as load_letters_model()
       - predict_letters()
+        - Input - An image (`image`), a boolean on whether to display confidence (`show_conf`), a boolean on whether to display hand keypoints (`show_landmarks`) and a confidence threshold for detections (`threshold`)
+        - Output - Classified letter, confidence of detection and the edited image
       - predict_words()
+        - Same as predict_letters()
   - preprocess
     - edge_highlight
       - preprocess()
         - Input - RGB image (,,3)
         - Output - Resized edge highlighted image of shape (240,240,1)
         - Used to pre-process the video frames / images before prediction
-    - mp_data_augmentation
-      - flip_keypoints()
-      - scale_keypoints()
-      - move_keypoints()
-      - rotate_keypoints()
-      - find_center()
-      - rotate_point()
+    - mp_data_augmentation - The following methods can be used to perform data augmentation on an array of keypoints. This is useful for training one's own model.
+      - flip_keypoints() - Flip keypoints along the center
+      - scale_keypoints() - Scale keypoints by a random amount
+      - move_keypoints() - Move keypoints by a random amount
+      - rotate_keypoints() - Rotate keypoints by a random amount
 
 ## Example
 Mediapipe-based classifier example

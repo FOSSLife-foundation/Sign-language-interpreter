@@ -7,5 +7,5 @@ setup(
     description='A framework to predict American Sign Language',
     author='FOSSLife Foundation',
     license='MIT',
-    install_requires=['mediapipe', 'opencv-python', 'keras']
+    install_requires=['mediapipe', 'opencv-python', 'keras', 'tensorflow']
 )

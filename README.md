@@ -20,7 +20,7 @@ pip install .
       - showscore()
         - Input - model output
         - Output - predicted label
-        - Used to visualize the output   
+        - Used to visualize the output. This function is not required to be called by the user  
       - predict()
         - Input - Edge higlighted image of shape (240,240,1)
         - Output - model output
@@ -77,3 +77,35 @@ while cap.isOpened():
     if cv2.waitKey(5) & 0xFF == 27:
         break
 ```
+Edge highligthed based classifier
+```python
+from  ASLInterpreter.preprocess.edge_highlight import preprocess
+#from  ASLInterpreter.predict.edge_letter import load_model,predict #this is for letter prediction
+from  ASLInterpreter.predict.edge_word import load_model,predict # this is for word prediction
+import cv2
+
+cap = cv2.VideoCapture(0)
+cap.set(3, 320)
+cap.set(4, 240)
+
+load_model("F:/WorkSpace\FOSSLIFE/Sign-Language-Interpreter/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite")
+
+while cap.isOpened():
+    success, image = cap.read()
+    if not ret:
+        break
+       
+    # Get edge highlited image
+    edges = preprocess(image)
+    
+    # Get prediction
+    name = predict(edges)
+    
+    cv2.imshow("",edges)
+   
+    if cv2.waitKey(30) & 0xff ==27:
+        break
+cv2.destroyAllWindows()
+cap.release()
+```
+

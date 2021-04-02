@@ -6,6 +6,12 @@ The goal of this project is to build a system that acts as a translator for Sign
 ## How it Works
 Frames from a video feed taken from a camera would be given as input to a pair of classification models. The camera would be positioned in front of the signer and as he/she is signing, one of the models would attempt to detect letters of the alphabet while the other would attempt to detect words/expressions in ASL. Both the models would be running on a Raspberry Pi and the video feed would be taken from a Pi camera. The exact architecture in which the two models are used is to be decided based on their individual performance and their composite performance.
 
+The classification can be done using two types of models
+- <strong>Mediapipe-based</strong>: Here, Mediapipe is used to detect and obtain the coordinates of different landmarks of the hand. These landmarks are fed into a classification model and a prediction of the respective sign is obtained.
+- <strong>Edge higlighted based</strong>: Here, the edges of shapes in the input image are highlighted and the resulting image is fed into a classification model for the prediction to be made.
+
+Of the two methods, the Mediapipe-based model seemed to outperform the Edge highlighted based model in accuracy while the opposite was true when it came to speed.
+
 ## Install
 ```console 
 git clone https://github.com/FOSSLife-foundation/Sign-language-interpreter.git
@@ -81,7 +87,7 @@ while cap.isOpened():
     if cv2.waitKey(5) & 0xFF == 27:
         break
 ```
-Edge highligthed based classifier
+Edge highlighted based classifier
 ```python
 from  ASLInterpreter.preprocess.edge_highlight import preprocess
 #from  ASLInterpreter.predict.edge_letter import load_model,predict #this is for letter prediction

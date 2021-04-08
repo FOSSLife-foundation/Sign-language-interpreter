@@ -27,9 +27,9 @@ Models are located in the ASLInterpreter/models directory in the cloned reposito
 
 -(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/model_words for mediapipe word model
 
--(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_letter.tflite for mediapipe letter model
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_letter.tflite for edge letter model
 
--(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite for mediapipe letter model
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite for edge letter model
 
 
 ## Import structure

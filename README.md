@@ -23,10 +23,14 @@ pip install .
 
 Models are located in the ASLInterpreter/models directory in the cloned repository.
 
-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/model_letters for mediapipe letter model
-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/model_words for mediapipe word model
-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_letter.tflite for mediapipe letter model
-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite for mediapipe letter model
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/model_letters for mediapipe letter model
+
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/model_words for mediapipe word model
+
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_letter.tflite for mediapipe letter model
+
+-(cloned_dir)/Sign-language-interpreter/ASLInterpreter/models/edge_word.tflite for mediapipe letter model
+
 
 ## Import structure
 - ASLInterpreter

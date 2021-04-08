@@ -19,6 +19,8 @@ cd Sign-Language-Interpreter
 pip install .
 ```
 
+*Note that it is necessary to locate the models before using.
+
 ## Import structure
 - ASLInterpreter
   - predict
